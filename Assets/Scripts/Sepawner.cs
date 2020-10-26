@@ -44,13 +44,9 @@ public class Sepawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (oxygenState.curOxy / oxygenState.maxOxy <= 0.1f && (!pausedState||takePhoto))
+        if (oxygenState.curOxy / oxygenState.maxOxy <= 0.1f && (!pausedState || takePhoto) && !delayState)
         {
-            iLocation = Random.Range(0, maxsizeloc);
-            Vector3 posx = lokasi[iLocation].transform.position;
-            Quaternion rotation = lokasi[iLocation].transform.rotation;
-            Instantiate(powerup[2], posx, rotation);
-            Debug.Log("Oxygen!");
+            StartCoroutine(SpawnOxygen());
         }
 
         if (zonab1)
@@ -68,7 +64,7 @@ public class Sepawner : MonoBehaviour
             StopCoroutine(Spawnning2());
             StopCoroutine(Spawnning3());
         }
-        if (zonab2)
+        else if (zonab2)
         {
             zoneName = "Mesopelagic";
             if (!delayState && (!pausedState || takePhoto))
@@ -83,7 +79,7 @@ public class Sepawner : MonoBehaviour
             StopCoroutine(Spawnning1());
             StopCoroutine(Spawnning3());
         }
-        if (zonab3)
+        else if (zonab3)
         {
             zoneName = "Bathypelagic";
             if (!delayState && (!pausedState || takePhoto))
@@ -97,6 +93,12 @@ public class Sepawner : MonoBehaviour
             }
             StopCoroutine(Spawnning1());
             StopCoroutine(Spawnning2());
+        }
+        else
+        {
+            StopCoroutine(Spawnning1());
+            StopCoroutine(Spawnning2());
+            StopCoroutine(Spawnning3());
         }
     }
 
@@ -180,6 +182,19 @@ public class Sepawner : MonoBehaviour
 
         zona3.Clear();
 
+        delayState = false;
+    }
+    IEnumerator SpawnOxygen()
+    {
+        delayState = true;
+        iLocation = Random.Range(0, maxsizeloc);
+        Vector3 posx = lokasi[iLocation].transform.position;
+        Quaternion rotation = lokasi[iLocation].transform.rotation;
+        Instantiate(powerup[2], posx, rotation);
+        Debug.Log("Oxygen!");
+        yield return new WaitForSeconds(batchsize);
+        batchsize = Random.Range(10, 40);
+        batchsize = (batchsize * 10) / 100;
         delayState = false;
     }
 }

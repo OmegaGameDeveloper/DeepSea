@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
 public class HiResScreenShots : MonoBehaviour
 {
@@ -62,6 +63,13 @@ public class HiResScreenShots : MonoBehaviour
         xAngle = 0;
         yAngle = 0;
         this.transform.rotation = Quaternion.Euler(yAngle, xAngle, 0);
+        string directoryPath = Application.persistentDataPath+"/screenshots";
+        if (!Directory.Exists(directoryPath))
+        {
+            //if it doesn't, create it
+            Directory.CreateDirectory(directoryPath);
+
+        }
     }
 
 

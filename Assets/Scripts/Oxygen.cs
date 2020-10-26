@@ -18,15 +18,21 @@ public class Oxygen : MonoBehaviour
         if (oxystage == 0)
         {
             curOxy = 100f;
+            maxOxy = 100f;
         }else if (oxystage == 1)
         {
             curOxy = 200f;
-        }else if (oxystage == 2)
+            maxOxy = 200f;
+        }
+        else if (oxystage == 2)
         {
             curOxy = 300f;
-        }else if (oxystage == 3)
+            maxOxy = 300f;
+        }
+        else if (oxystage == 3)
         {
             curOxy = 400f;
+            maxOxy = 400f;
         }
     }
 

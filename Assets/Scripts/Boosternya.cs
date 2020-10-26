@@ -8,7 +8,7 @@ public class Boosternya : MonoBehaviour
     public GameObject boosterParticle,shieldParticle;
     public float timer, timerawal;
     public bool timerIsRunning, boosterstat;
-    int JumlahBooster, boosterStage;
+    public int JumlahBooster, boosterStage;
     public Button but;
     public bool isTimeAdded;
 
@@ -16,15 +16,19 @@ public class Boosternya : MonoBehaviour
     void Start()
     {
         boosterStage = PlayerPrefs.GetInt("BoosterStage");
+        JumlahBooster = 0;
     }
 
 
     public void Aktifasi()
     {
-        boosterstat = true;
-        JumlahBooster -= 1;
-        PlayerPrefs.SetInt("BoosterQty", JumlahBooster);
-        isTimeAdded = true;
+        if (JumlahBooster != 0)
+        {
+            boosterstat = true;
+            JumlahBooster -= 1;
+            PlayerPrefs.SetInt("BoosterQty", JumlahBooster);
+            isTimeAdded = true;
+        }
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class Boosternya : MonoBehaviour
         }
 
         JumlahBooster = PlayerPrefs.GetInt("BoosterQty");
-        if (JumlahBooster <= 0 && boosterstat)
+        if (JumlahBooster ==0)
         {
             but.interactable = false;
         }
@@ -54,7 +58,7 @@ public class Boosternya : MonoBehaviour
             but.interactable = true;
         }
 
-        if (boosterstat && JumlahBooster<=0)
+        if (boosterstat)
         {
             boosterParticle.SetActive(true);
             gameObject.tag = "Super Invincible";
@@ -64,7 +68,7 @@ public class Boosternya : MonoBehaviour
         }
         else
         {
-            if (gameObject.tag == "Invincible")
+            if (gameObject.tag == "Invincible" && JumlahBooster ==0)
             {
                 boosterParticle.SetActive(false);
             }
@@ -82,7 +86,7 @@ public class Boosternya : MonoBehaviour
             timer = timerawal;
             Time.timeScale = 1f;
             boosterstat = false;
-            if(gameObject.tag=="Super Invincible" && shieldParticle.active == false)
+            if(gameObject.tag=="Super Invincible" && shieldParticle.active == false && JumlahBooster != 0)
             {
                 gameObject.tag = "Player";
             }else

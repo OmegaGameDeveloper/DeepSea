@@ -12,22 +12,27 @@ public class ExplosionContact : MonoBehaviour
     void Start()
     {
         darahBoss = GetComponent<DarahBoss>();
+        AudioSource audio1 = GetComponent<AudioSource>();
+        audio1.Play();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag=="Enemy")
+        if (collision.gameObject.tag=="Enemy" || collision.gameObject.tag =="Boss")
         {
             ContactPoint contact = collision.contacts[0];
             Quaternion rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
             Vector3 position = contact.point;
             Instantiate(explosionParticle, position, rotation);
-            Destroy(collision.gameObject);
+            AudioSource audio = collision.collider.GetComponent<AudioSource>();
+            audio.Play();
             Destroy(gameObject);
         }
-        else
+        if (collision.gameObject.tag == "Enemy")
         {
+            Destroy(collision.gameObject);
         }
+
     }
 
     // Update is called once per frame

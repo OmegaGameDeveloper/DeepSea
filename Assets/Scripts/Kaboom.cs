@@ -31,7 +31,7 @@ public class Kaboom : MonoBehaviour
     // Update is called once per frame
     public void Aktifasi()
     {
-        if (JumlahShield <= 0)
+        if (JumlahShield == 0)
         {
             kaboomButton.interactable = false;
             textAnimator.SetBool("Habis", true);
@@ -45,8 +45,8 @@ public class Kaboom : MonoBehaviour
             textAnimator.SetBool("Habis", false);
             kaboomButton.interactable = true;
             isShoot = true;
-            JumlahShield -= 3;
-            PlayerPrefs.SetInt("Kaboom Qty", JumlahShield);
+            JumlahShield -= 1;
+            PlayerPrefs.SetInt("KaboomQty", JumlahShield);
         }
     }
 
@@ -75,9 +75,9 @@ public class Kaboom : MonoBehaviour
             isFire = false;
         }
 
-        JumlahShield = PlayerPrefs.GetInt("Kaboom Qty");
+        JumlahShield = PlayerPrefs.GetInt("KaboomQty",1);
 
-        if (JumlahShield <= 0)
+        if (JumlahShield == 0)
         {
             kaboomButton.interactable = false;
         }

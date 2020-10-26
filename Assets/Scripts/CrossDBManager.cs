@@ -10,7 +10,7 @@ public class CrossDBManager : MonoBehaviour
 
     public string cekFreshUrl,registerProfilerUrl, getHighScore_url, setProgress_url;
     //Response
-    public GameObject goIfEmpty, goDBResponse,goNewProfile,goProfile,goIfDuplicate,goNewFreshProfile;
+    public GameObject goIfEmpty, goDBResponse,goNewProfile,goProfile,goIfDuplicate,goNewFreshProfile,canvasMainMenu;
     public Text DBResponse,DBProfileName;
     public Text[] teksUsername, teksScore;
     public Text usernamenya;
@@ -40,10 +40,12 @@ public class CrossDBManager : MonoBehaviour
             LusernameString = PlayerPrefs.GetString("username");
             if (LusernameString == "")
             {
+                canvasMainMenu.SetActive(false);
                 StartCoroutine(freshProfileCek());
             }
             else
             {
+                canvasMainMenu.SetActive(true);
                 usernamenya.text = LusernameString;
             }
         }
@@ -112,6 +114,7 @@ public class CrossDBManager : MonoBehaviour
             PlayerPrefs.SetInt("ShieldStage", int.Parse(shieldStageString));
             PlayerPrefs.SetInt("BoosterStage", int.Parse(boosterStageString));
             PlayerPrefs.SetInt("Coinnya",int.Parse(coinString));
+            canvasMainMenu.SetActive(true);
         }
     }
     //SendRegisterProfileBaru
@@ -144,6 +147,7 @@ public class CrossDBManager : MonoBehaviour
                 goNewFreshProfile.SetActive(false);
                 DBProfileName.text = usernameString;
                 PlayerPrefs.SetString("username", usernameText.text);
+                canvasMainMenu.SetActive(true);
             }
             else if (download.downloadHandler.text == "Gagal")
             {

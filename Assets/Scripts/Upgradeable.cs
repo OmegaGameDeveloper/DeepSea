@@ -31,7 +31,7 @@ public class Upgradeable : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        coin = PlayerPrefs.GetInt("Coin Qty");
+        coin = PlayerPrefs.GetInt("CoinQty");
         boosterstage = PlayerPrefs.GetInt("BoosterStage",0);
         shieldstage = PlayerPrefs.GetInt("ShieldStage",0);
         kaboomstage = PlayerPrefs.GetInt("KaboomStage",0);
@@ -163,7 +163,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("BoosterStage", 1);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -175,7 +175,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("BoosterStage", 2);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -188,7 +188,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("BoosterStage", 3);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -207,7 +207,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("OxygenStage", 1);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -220,7 +220,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("OxygenStage", 2);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -233,7 +233,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("OxygenStage", 3);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -252,7 +252,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("ShieldStage", 1);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -265,7 +265,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("ShieldStage", 2);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -278,7 +278,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("ShieldStage", 3);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -297,7 +297,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("KaboomStage", 1);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -310,7 +310,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("KaboomStage", 2);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {
@@ -323,7 +323,7 @@ public class Upgradeable : MonoBehaviour
                 if (tempcoin >= 0)
                 {
                     PlayerPrefs.SetInt("KaboomStage", 3);
-                    PlayerPrefs.SetInt("Coin Qty", tempcoin);
+                    PlayerPrefs.SetInt("CoinQty", tempcoin);
                 }
                 else
                 {

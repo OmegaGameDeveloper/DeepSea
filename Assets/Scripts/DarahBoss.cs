@@ -6,6 +6,7 @@ public class DarahBoss : MonoBehaviour
 {
     public int maxDarah = 100;
     public int darah = 0;
+    public int kaboomStage;
     public bool mati,damaged;
     public GameState gameState;
 
@@ -23,6 +24,7 @@ public class DarahBoss : MonoBehaviour
         healthBar.value = maxDarah;
         darah = maxDarah;
         rend.material = material1;
+        kaboomStage = PlayerPrefs.GetInt("KaboomStage",0);
     }
 
     public void Damage(int hajar)
@@ -82,9 +84,27 @@ public class DarahBoss : MonoBehaviour
     {
         if (collision.gameObject.tag == "Peluru"&&gameObject.tag=="Boss")
         {
-            Damage(10);
-            float lerp = Mathf.PingPong(Time.time, duration) / duration;
-            rend.material.Lerp(material1, material2, lerp);
+            if (kaboomStage == 0)
+            {
+                Damage(5);
+                float lerp = Mathf.PingPong(Time.time, duration) / duration;
+                rend.material.Lerp(material1, material2, lerp);
+            }else if (kaboomStage == 1)
+            {
+                Damage(10);
+                float lerp = Mathf.PingPong(Time.time, duration) / duration;
+                rend.material.Lerp(material1, material2, lerp);
+            }else if (kaboomStage == 2)
+            {
+                Damage(15);
+                float lerp = Mathf.PingPong(Time.time, duration) / duration;
+                rend.material.Lerp(material1, material2, lerp);
+            }else if (kaboomStage == 3)
+            {
+                Damage(20);
+                float lerp = Mathf.PingPong(Time.time, duration) / duration;
+                rend.material.Lerp(material1, material2, lerp);
+            }
         }
 
     }

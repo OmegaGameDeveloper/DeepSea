@@ -8,7 +8,7 @@ public class AktivasiTameng : MonoBehaviour
 
     public GameObject shieldParticle;
     public bool shieldstat;
-    int JumlahShield,shieldstage;
+    public int JumlahShield,shieldstage;
     public Button shieldButton;
 
     // Start is called before the first frame update
@@ -20,16 +20,16 @@ public class AktivasiTameng : MonoBehaviour
 
     public void Aktifasi()
     {
-        shieldstat = true;
-        JumlahShield -= 1;
-        PlayerPrefs.SetInt("ShieldQty", JumlahShield);
+         shieldstat = true;
+         JumlahShield -= 1;
+         PlayerPrefs.SetInt("ShieldQty", JumlahShield);
     }
 
     // Update is called once per frame
     void Update()
     {
         JumlahShield = PlayerPrefs.GetInt("ShieldQty");
-        if (JumlahShield <= 0 && shieldstat)
+        if (JumlahShield == 0)
         {
             shieldButton.interactable = false;
         }
@@ -37,7 +37,7 @@ public class AktivasiTameng : MonoBehaviour
         {
             shieldButton.interactable = true;
         }
-        if (shieldstat && JumlahShield <= 0)
+        if (shieldstat)
         {
             shieldParticle.SetActive(true);
             gameObject.tag = "Invincible";
@@ -45,12 +45,13 @@ public class AktivasiTameng : MonoBehaviour
         }
         else
         {
-            if (gameObject.tag != "Super Invincible")
+            if (gameObject.tag != "Super Invincible" && JumlahShield != 0)
             {
                 shieldParticle.SetActive(false);
                 gameObject.tag = "Player";
                 shieldButton.interactable = true;
             }
+            else { shieldParticle.SetActive(false); }
         }
 
     }

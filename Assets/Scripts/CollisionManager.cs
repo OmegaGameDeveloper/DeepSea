@@ -18,24 +18,35 @@ public class CollisionManager : MonoBehaviour
 
     void Start()
     {
-        boosterstage = PlayerPrefs.GetInt("BoosterStage");
-        shieldstage = PlayerPrefs.GetInt("ShieldStage");
-        kaboomstage = PlayerPrefs.GetInt("KaboomStage");
-        oxystage = PlayerPrefs.GetInt("OxygenStage");
+        CoinSaatIni = PlayerPrefs.GetInt("CoinQty",0);
+        //AutoSaatIni = PlayerPrefs.GetInt("Autonya", 0);
+        GuardianSaatIni = PlayerPrefs.GetInt("ShieldQty",1);
+        ShootingPartSaatIni = PlayerPrefs.GetInt("KaboomQty",1);
+        BoosterSaatIni = PlayerPrefs.GetInt("BoosterQty",1);
+        boosterstage = PlayerPrefs.GetInt("BoosterStage",0);
+        shieldstage = PlayerPrefs.GetInt("ShieldStage",0);
+        kaboomstage = PlayerPrefs.GetInt("KaboomStage",0);
+        oxystage = PlayerPrefs.GetInt("OxygenStage",0);
+
+        PlayerPrefs.SetInt("ShieldQty", 1);
+        PlayerPrefs.SetInt("KaboomQty", 1);
+        PlayerPrefs.SetInt("BoosterQty", 1);
+
+
         tamengnya = gameObject.GetComponent<AktivasiTameng>();
-        if (oxystage == 0)
+        if (shieldstage == 0)
         {
             shieldhealth = 1;
         }
-        else if (oxystage == 1)
+        else if (shieldstage == 1)
         {
             shieldhealth = 2;
         }
-        else if (oxystage == 2)
+        else if (shieldstage == 2)
         {
             shieldhealth = 3;
         }
-        else if (oxystage == 3)
+        else if (shieldstage == 3)
         {
             shieldhealth = 4;
         }
@@ -54,6 +65,7 @@ public class CollisionManager : MonoBehaviour
             if (transform.gameObject.tag == "Invincible")
             {
                 shieldhealth -= 1;
+
                 if (shieldhealth > 1)
                 {
                     Destroy(collision.collider.gameObject);
@@ -101,7 +113,7 @@ public class CollisionManager : MonoBehaviour
 
         if (collision.collider.tag == "Coin")
         {
-            PlayerPrefs.SetInt("Coinnya", CoinSaatIni + 1);
+            PlayerPrefs.SetInt("CoinQty", CoinSaatIni + 1);
             Destroy(collision.collider.gameObject);
         }
         if (collision.collider.tag == "Oxygen")
@@ -156,42 +168,21 @@ public class CollisionManager : MonoBehaviour
         }
         if (collision.collider.tag == "Guardian")
         {
-            PlayerPrefs.SetInt("Guardiannya", GuardianSaatIni + 1);
+            PlayerPrefs.SetInt("ShieldQty", GuardianSaatIni + 1);
             Destroy(collision.collider.gameObject);
             TeksGuardian.text = (GuardianSaatIni+1).ToString();
         }
-        if (collision.collider.tag == "Auto")
-        {
-            PlayerPrefs.SetInt("Autonya", AutoSaatIni + 1);
-            Destroy(collision.collider.gameObject);
-            //TeksAuto.text = (AutoSaatIni + 1).ToString();
-        }
         if (collision.collider.tag == "Booster")
         {
-            PlayerPrefs.SetInt("Boosternya", AutoSaatIni + 1);
+            PlayerPrefs.SetInt("BoosterQty", AutoSaatIni + 1);
             Destroy(collision.collider.gameObject);
             TeksBooster.text = (BoosterSaatIni + 1).ToString();
         }
         if (collision.collider.tag == "Kaboom Qty")
         {
-            PlayerPrefs.SetInt("Kaboom Qtynya", ShootingPartSaatIni + 1);
+            PlayerPrefs.SetInt("KaboomQty", ShootingPartSaatIni + 1);
             Destroy(collision.collider.gameObject);
-            if (kaboomstage == 0)
-            {
-                ShootingIni = ShootingPartSaatIni / 4;
-            }else if (kaboomstage == 1)
-            {
-                ShootingIni = ShootingPartSaatIni / 3;
-            }
-            else if (kaboomstage == 2)
-            {
-                ShootingIni = ShootingPartSaatIni / 2;
-            }
-            else if (kaboomstage == 3)
-            {
-                ShootingIni = ShootingPartSaatIni / 1;
-            }
-            TeksShooting.text = (Mathf.Floor(ShootingIni)+1).ToString();
+            TeksShooting.text = (ShootingPartSaatIni+1).ToString();
         }
     }
 
@@ -218,30 +209,14 @@ public class CollisionManager : MonoBehaviour
             Time.timeScale = 0f;
             CDBM.SyncData();
         }
-        CoinSaatIni = PlayerPrefs.GetInt("Coinnya", 0);
+        CoinSaatIni = PlayerPrefs.GetInt("CoinQty");
         //AutoSaatIni = PlayerPrefs.GetInt("Autonya", 0);
-        GuardianSaatIni = PlayerPrefs.GetInt("Guardiannya", 0);
-        ShootingPartSaatIni = PlayerPrefs.GetInt("Kaboom Qtynya", 0);
-        BoosterSaatIni = PlayerPrefs.GetInt("Boosternya", 0);
+        GuardianSaatIni = PlayerPrefs.GetInt("ShieldQty");
+        ShootingPartSaatIni = PlayerPrefs.GetInt("KaboomQty");
+        BoosterSaatIni = PlayerPrefs.GetInt("BoosterQty");
         TeksGuardian.text = GuardianSaatIni.ToString();
         //TeksAuto.text = AutoSaatIni.ToString();
         TeksBooster.text = BoosterSaatIni.ToString();
-        if (kaboomstage == 0)
-        {
-            ShootingIni = ShootingPartSaatIni / 4;
-        }
-        else if (kaboomstage == 1)
-        {
-            ShootingIni = ShootingPartSaatIni / 3;
-        }
-        else if (kaboomstage == 2)
-        {
-            ShootingIni = ShootingPartSaatIni / 2;
-        }
-        else if (kaboomstage == 3)
-        {
-            ShootingIni = ShootingPartSaatIni / 1;
-        }
-        TeksShooting.text = Mathf.Floor(ShootingIni).ToString();
+        TeksShooting.text = ShootingPartSaatIni.ToString();
     }
 }
