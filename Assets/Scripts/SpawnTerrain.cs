@@ -9,16 +9,16 @@ public class SpawnTerrain : MonoBehaviour
     public GameObject[] terrain;
     public float theTime;
 
-    public bool spawn;
+    public bool spawnning;
 
-
+    public Sepawner spawn;
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "SpawnKeun")
         {
-            spawn = true;
+            spawnning = true;
         }
     }
 
@@ -34,15 +34,24 @@ public class SpawnTerrain : MonoBehaviour
         //Waktu = 26.9321;
         theTime += Time.deltaTime * Time.timeScale;
         if (theTime >= 25.89) {
-            spawn = true;
+            spawnning = true;
         }
-        if (spawn == true)
+        if (spawnning == true)
         {
-            spawn = false;
-            int maxterrain = terrain.Length;
-            int saatini = UnityEngine.Random.Range(0, maxterrain);
-            Instantiate(terrain[saatini], transform.position + (new Vector3(-85,-gameObject.transform.position.y,56.3f)), transform.rotation);
-            theTime = 0;
+            if(spawn.zonab1 == true)
+            {
+                spawnning = false;
+                int saatini = UnityEngine.Random.Range(0, 2);
+                Instantiate(terrain[saatini], transform.position + (new Vector3(-85, -gameObject.transform.position.y, 56.3f)), transform.rotation);
+                theTime = 0;
+            }
+            if (spawn.zonab2 == true)
+            {
+                spawnning = false;
+                int saatini = UnityEngine.Random.Range(3, 4);
+                Instantiate(terrain[saatini], transform.position + (new Vector3(-85, -gameObject.transform.position.y, 56.3f)), transform.rotation);
+                theTime = 0;
+            }
         }
     }
 }

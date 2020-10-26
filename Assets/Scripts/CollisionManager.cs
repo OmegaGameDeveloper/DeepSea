@@ -14,7 +14,7 @@ public class CollisionManager : MonoBehaviour
     public Text TeksCoin, TeksGuardian, TeksAuto, TeksBooster, TeksShooting;
     public AktivasiTameng tamengnya;
     public int boosterstage, shieldstage, kaboomstage, oxystage,shieldhealth;
-    
+    public CrossDBManager CDBM;
 
     void Start()
     {
@@ -69,7 +69,7 @@ public class CollisionManager : MonoBehaviour
     
         }
 
-        if (collision.collider.tag == "Boss")
+        if (collision.collider.tag == "Boss" || collision.collider.tag=="BossInvincible")
         {
             if (transform.gameObject.tag == "Player")
             {
@@ -172,9 +172,9 @@ public class CollisionManager : MonoBehaviour
             Destroy(collision.collider.gameObject);
             TeksBooster.text = (BoosterSaatIni + 1).ToString();
         }
-        if (collision.collider.tag == "Shooting Part")
+        if (collision.collider.tag == "Kaboom Qty")
         {
-            PlayerPrefs.SetInt("Shooting Partnya", ShootingPartSaatIni + 1);
+            PlayerPrefs.SetInt("Kaboom Qtynya", ShootingPartSaatIni + 1);
             Destroy(collision.collider.gameObject);
             if (kaboomstage == 0)
             {
@@ -216,11 +216,12 @@ public class CollisionManager : MonoBehaviour
         if (kenagakya)
         {
             Time.timeScale = 0f;
+            CDBM.SyncData();
         }
         CoinSaatIni = PlayerPrefs.GetInt("Coinnya", 0);
         //AutoSaatIni = PlayerPrefs.GetInt("Autonya", 0);
         GuardianSaatIni = PlayerPrefs.GetInt("Guardiannya", 0);
-        ShootingPartSaatIni = PlayerPrefs.GetInt("Shooting Partnya", 0);
+        ShootingPartSaatIni = PlayerPrefs.GetInt("Kaboom Qtynya", 0);
         BoosterSaatIni = PlayerPrefs.GetInt("Boosternya", 0);
         TeksGuardian.text = GuardianSaatIni.ToString();
         //TeksAuto.text = AutoSaatIni.ToString();

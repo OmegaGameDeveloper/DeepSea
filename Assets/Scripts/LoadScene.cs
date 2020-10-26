@@ -20,6 +20,11 @@ public class LoadScene : MonoBehaviour
         StartCoroutine(LoadingScreen(SceneIndex));
     }
 
+    public void ExitTheGame()
+    {
+        Application.Quit();
+    }
+
     IEnumerator LoadingScreen (int SceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneIndex);

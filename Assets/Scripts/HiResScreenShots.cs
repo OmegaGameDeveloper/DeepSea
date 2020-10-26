@@ -13,24 +13,75 @@ public class HiResScreenShots : MonoBehaviour
 
     public Camera camera;
 
+    public GameState gameState;
+
+    public bool prepareCamera;
+
+    Vector3 FirstPoint;
+    Vector3 SecondPoint;
+    float xAngle;
+    float yAngle;
+    float xAngleTemp;
+    float yAngleTemp;
+
+
+    void Update()
+    {
+        if (prepareCamera)
+        {
+            gameState.takePhoto = true;
+            if (Input.touchCount > 0)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    FirstPoint = Input.GetTouch(0).position;
+                    xAngleTemp = xAngle;
+                    yAngleTemp = yAngle;
+                }
+                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    SecondPoint = Input.GetTouch(0).position;
+                    xAngle = xAngleTemp + (SecondPoint.x - FirstPoint.x) * 180 / Screen.width;
+                    yAngle = yAngleTemp + (SecondPoint.y - FirstPoint.y) * 90 / Screen.height;
+                    this.transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
+                }
+            }
+        }
+        else
+        {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            gameState.takePhoto = false;
+        }
+    }
+
+
+
     private void Start()
     {
         texturefoto = texturefoto.GetComponent<RawImage>();
-
+        xAngle = 0;
+        yAngle = 0;
+        this.transform.rotation = Quaternion.Euler(yAngle, xAngle, 0);
     }
 
 
     public static string ScreenShotName(int width, int height)
     {
         return string.Format("{0}/screenshots/screen_{1}x{2}_{3}.png",
-                             Application.dataPath,
+                             Application.persistentDataPath,
                              width, height,
                              System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+    }
+
+    public void PrepareFoto()
+    {
+        prepareCamera = true;
     }
 
     public void TakeHiResShot()
     {
         takeHiResShot = true;
+        prepareCamera = false;
     }
 
     void LateUpdate()

@@ -45,7 +45,7 @@ public class Boosternya : MonoBehaviour
         }
 
         JumlahBooster = PlayerPrefs.GetInt("BoosterQty");
-        if (JumlahBooster <= 0)
+        if (JumlahBooster <= 0 && boosterstat)
         {
             but.interactable = false;
         }
@@ -54,7 +54,7 @@ public class Boosternya : MonoBehaviour
             but.interactable = true;
         }
 
-        if (boosterstat)
+        if (boosterstat && JumlahBooster<=0)
         {
             boosterParticle.SetActive(true);
             gameObject.tag = "Super Invincible";

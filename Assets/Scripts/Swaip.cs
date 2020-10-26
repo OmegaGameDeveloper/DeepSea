@@ -24,6 +24,8 @@ public class Swaip : MonoBehaviour
     public bool autonya;
     public AutoPilot autopilotnya;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,18 @@ public class Swaip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Naik"))
+        {
+            animator.SetBool("Naik", false);
+
+        }
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Turun"))
+        {
+            animator.SetBool("Turun", false);
+
+        }
+
         if (autonya)
         {
             autopilotnya.enabled = true;
@@ -133,7 +147,7 @@ public class Swaip : MonoBehaviour
                     atasb = false;
                     bawahb = false;
                     tengahb = true;
-                   
+                    animator.SetBool("Turun", true);                   
                 }
                 else
                 {
@@ -141,18 +155,16 @@ public class Swaip : MonoBehaviour
                     atasb = false;
                     bawahb = false;
                     tengahb = false;
-                    
                 }
             }
             if (bawahn)
             {
                 if (swipeDistance.y > 0)
-                {
-                   
+                {                   
                     atasb = false;
                     bawahb = false;
                     tengahb = true;
-                    
+                    animator.SetBool("Naik", true);
                 }
                 else
                 {
@@ -160,22 +172,20 @@ public class Swaip : MonoBehaviour
                     atasb = false;
                     bawahb = false;
                     tengahb = false;
-                    
                 }
             }
             if (tengahn)
             {
                 if (swipeDistance.y < 0)
-                {
-                    
+                {                    
                     atasb = false;
                     bawahb = true;
                     tengahb = false;
-                    
+                    animator.SetBool("Turun", true);
                 }
                 else
                 {
-                    
+                    animator.SetBool("Naik", true);
                     atasb = true;
                     bawahb = false;
                     tengahb = false;

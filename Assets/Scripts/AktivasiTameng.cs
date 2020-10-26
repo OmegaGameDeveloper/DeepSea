@@ -29,7 +29,7 @@ public class AktivasiTameng : MonoBehaviour
     void Update()
     {
         JumlahShield = PlayerPrefs.GetInt("ShieldQty");
-        if (JumlahShield <= 0)
+        if (JumlahShield <= 0 && shieldstat)
         {
             shieldButton.interactable = false;
         }
@@ -37,8 +37,7 @@ public class AktivasiTameng : MonoBehaviour
         {
             shieldButton.interactable = true;
         }
-
-        if (shieldstat)
+        if (shieldstat && JumlahShield <= 0)
         {
             shieldParticle.SetActive(true);
             gameObject.tag = "Invincible";
@@ -46,11 +45,13 @@ public class AktivasiTameng : MonoBehaviour
         }
         else
         {
-            if (gameObject.tag!="Super Invincible"){
+            if (gameObject.tag != "Super Invincible")
+            {
                 shieldParticle.SetActive(false);
                 gameObject.tag = "Player";
                 shieldButton.interactable = true;
             }
         }
+
     }
 }

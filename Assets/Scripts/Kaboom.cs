@@ -12,7 +12,7 @@ public class Kaboom : MonoBehaviour
     public bool isShoot,isFire;
     public Animator kaboomAnimator,textAnimator;
     public ParticleSystem kaboomParticle;
-    int JumlahShield;
+    public int JumlahShield;
     public Button kaboomButton;
 
     public float timer, timerawal;
@@ -101,7 +101,7 @@ public class Kaboom : MonoBehaviour
         }
     }
 
-    public void Tembak()
+    void Tembak()
     {
         kaboomParticle.Play();
         Vector3 posx = lokasitembak.transform.position;

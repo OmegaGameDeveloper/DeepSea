@@ -13,6 +13,7 @@ public class CrossDBManager : MonoBehaviour
     public GameObject goIfEmpty, goDBResponse,goNewProfile,goProfile,goIfDuplicate,goNewFreshProfile;
     public Text DBResponse,DBProfileName;
     public Text[] teksUsername, teksScore;
+    public Text usernamenya;
     //DB
     public string usernameString,shieldStageString,boosterStageString,oxyStageString,coinString,kaboomStageString,scoreString;
     public InputField usernameText;
@@ -25,6 +26,7 @@ public class CrossDBManager : MonoBehaviour
     public string[] usernameArray,shieldArray,boosterArray,oxyArray,coinArray,kaboomArray,scoreArray;
 
     public int panjangArray, scoreStringBefore;
+    public int scorenya;
 
     public List<string> usernameList,shieldList,boosterList,oxyList,coinList,kaboomList,scoreList = new List<string>();
 
@@ -33,10 +35,21 @@ public class CrossDBManager : MonoBehaviour
     void Start()
     {
         Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == "MainMenu")
+        if (scene.name == "Main Menu")
         {
-            LusernameString = PlayerPrefs.GetString("username", "");
-            StartCoroutine(freshProfileCek());
+            LusernameString = PlayerPrefs.GetString("username");
+            if (LusernameString == "")
+            {
+                StartCoroutine(freshProfileCek());
+            }
+            else
+            {
+                usernamenya.text = LusernameString;
+            }
+        }
+        if(scene.name=="Level 1")
+        {
+           
         }
     }
     //Baru
@@ -55,6 +68,10 @@ public class CrossDBManager : MonoBehaviour
     {
         StartCoroutine(Sync());
     }
+
+
+
+
     //CekProfileAwal()
     IEnumerator freshProfileCek()
     {
@@ -152,7 +169,9 @@ public class CrossDBManager : MonoBehaviour
         boosterStageString = PlayerPrefs.GetInt("BoosterStage").ToString();
         coinString = PlayerPrefs.GetInt("Coinnya").ToString();
         scoreStringBefore = PlayerPrefs.GetInt("Score");
-        if (int.Parse(scoreString) > scoreStringBefore)
+
+        int.TryParse(scoreString, out scorenya);
+        if (scorenya > scoreStringBefore)
         {
             WWWForm form = new WWWForm();
             form.AddField("username", usernameString);

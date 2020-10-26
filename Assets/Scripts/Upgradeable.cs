@@ -29,6 +29,8 @@ public class Upgradeable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
+
         coin = PlayerPrefs.GetInt("Coin Qty");
         boosterstage = PlayerPrefs.GetInt("BoosterStage",0);
         shieldstage = PlayerPrefs.GetInt("ShieldStage",0);

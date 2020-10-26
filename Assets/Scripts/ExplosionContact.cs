@@ -11,8 +11,7 @@ public class ExplosionContact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        entityBoss = GameObject.FindGameObjectWithTag("Boss");
-        darahBoss = entityBoss.GetComponent<DarahBoss>();
+        darahBoss = GetComponent<DarahBoss>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,10 +27,6 @@ public class ExplosionContact : MonoBehaviour
         }
         else
         {
-        }
-        if (collision.gameObject.tag == "Boss")
-        {
-            darahBoss.Damage(10);
         }
     }
 

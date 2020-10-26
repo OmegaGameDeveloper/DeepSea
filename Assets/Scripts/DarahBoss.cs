@@ -1,27 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class DarahBoss : MonoBehaviour
 {
-    public int darah = 100;
+    public int maxDarah = 100;
+    public int darah = 0;
     public bool mati,damaged;
     public GameState gameState;
+
+    public Slider healthBar;
+    public Material material1;
+    public Material material2;
+    float duration = 0.2f;
+    public Renderer rend;
+    public Sepawner spawn;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthBar.maxValue = maxDarah;
+        healthBar.value = maxDarah;
+        darah = maxDarah;
+        rend.material = material1;
     }
 
     public void Damage(int hajar)
     {
         darah = darah - hajar;
+        healthBar.value = darah;
         damaged = true;
+
     }
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (darah == 0)
         {
             mati = true;
@@ -30,12 +44,47 @@ public class DarahBoss : MonoBehaviour
         {
             gameObject.tag = "BossInvincible";
             damaged = false;
+
         }
 
         if (mati)
         {
+
             gameState.isBossDead = true;
+            healthBar.maxValue = maxDarah;
+            healthBar.value = maxDarah;
+            darah = maxDarah;
             gameObject.SetActive(false);
+            
+            if (gameObject.name == "Plesio")
+            {
+                spawn.zonab2 = true;
+                spawn.zonab1 = false;
+                spawn.zonab3 = false;
+            }
+            if (gameObject.name == "Morray")
+            {
+                spawn.zonab3 = true;
+                spawn.zonab1 = false;
+                spawn.zonab2 = false;
+            }
+            if (gameObject.name == "Gulper")
+            {
+                spawn.zonab1 = true;
+                spawn.zonab2 = false;
+                spawn.zonab3 = false;
+            }
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Peluru"&&gameObject.tag=="Boss")
+        {
+            Damage(10);
+            float lerp = Mathf.PingPong(Time.time, duration) / duration;
+            rend.material.Lerp(material1, material2, lerp);
         }
 
     }
