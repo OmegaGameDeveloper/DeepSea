@@ -12,7 +12,7 @@ public class Kaboom : MonoBehaviour
     public bool isShoot,isFire;
     public Animator kaboomAnimator,textAnimator;
     public ParticleSystem kaboomParticle;
-    public int JumlahShield;
+    public int JumlahKaboom;
     public Button kaboomButton;
 
     public float timer, timerawal;
@@ -53,16 +53,6 @@ public class Kaboom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (darahBoss.damaged)
-        {
-            kaboomButton.interactable = false;
-        }
-        else
-        {
-            kaboomButton.interactable = true;
-        }
-        */
         if (isFire)
         {
             timer -= Time.unscaledDeltaTime;
